@@ -1,0 +1,12 @@
+rule "nfc"
+when
+    Item NFC_Reader_item received update
+then
+  if (NFC_Reader_item.state == "ON" || (NFC_Reader_item.state == "TOGGLE" && lampe.state == OFF)) {
+    lampe.sendCommand(ON)
+  } else {
+    if (NFC_Reader_item.state == "OFF" || (NFC_Reader_item.state == "TOGGLE" && lampe.state == ON)) {
+      lampe.sendCommand(OFF)
+    }
+  }
+end
