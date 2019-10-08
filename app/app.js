@@ -26,7 +26,7 @@ client.on('message', async (topic, message) => {
         const uid = message.toString();
         const buyLight = getContract(uid).methods.buyLight;
         await buyLight.send({
-          from: mapping[message.toString()],
+          from: mapping[uid],
           value: Math.pow(10, 18)
         });
         client.publish('/lampe21Status', 'TOGGLE', console.error);
